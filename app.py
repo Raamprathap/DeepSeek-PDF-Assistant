@@ -10,7 +10,7 @@ from langchain.chains.combine_documents.stuff import StuffDocumentsChain
 from langchain.chains import RetrievalQA
 
 # Streamlit app title
-st.title("Build a RAG System with DeepSeek R1 & Ollama")
+st.title("DeepSeek-PDF-Assistant")
 
 # Load the PDF
 uploaded_file = st.file_uploader("Upload a PDF file", type="pdf")
