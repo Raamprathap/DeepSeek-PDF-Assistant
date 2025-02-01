@@ -37,7 +37,7 @@ if uploaded_file is not None:
 
     try:
         llm = Ollama(
-            model="deepseek-r1",
+            model="deepseek-r1:1.5b",
             base_url="http://localhost:11434",
         )
     except Exception as e:
