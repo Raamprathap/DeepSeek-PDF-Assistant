@@ -16,7 +16,7 @@ if 'responses' not in st.session_state:
 if 'counter' not in st.session_state:
     st.session_state.counter = 0
 
-st.title("Build a RAG System with DeepSeek R1 & Ollama")
+st.title("Deepseek PDF Assistant")
 
 uploaded_file = st.file_uploader("Upload a PDF file", type="pdf")
 
