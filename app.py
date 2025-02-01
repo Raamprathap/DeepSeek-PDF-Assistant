@@ -9,29 +9,29 @@ from langchain.chains import LLMChain
 from langchain.chains.combine_documents.stuff import StuffDocumentsChain
 from langchain.chains import RetrievalQA
 
-# Streamlit app title
-st.title("DeepSeek-PDF-Assistant")
+if 'questions' not in st.session_state:
+    st.session_state.questions = []
+if 'responses' not in st.session_state:
+    st.session_state.responses = []
+if 'counter' not in st.session_state:
+    st.session_state.counter = 0
 
-# Load the PDF
+st.title("Build a RAG System with DeepSeek R1 & Ollama")
+
 uploaded_file = st.file_uploader("Upload a PDF file", type="pdf")
 
 if uploaded_file is not None:
-    # Save the uploaded file to a temporary location
     with open("temp.pdf", "wb") as f:
         f.write(uploaded_file.getvalue())
 
-    # Load the PDF
     loader = PDFPlumberLoader("temp.pdf")
     docs = loader.load()
 
-    # Split into chunks
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=0)
     documents = text_splitter.split_documents(docs)
 
-    # Instantiate the embedding model with explicit model name
     embedder = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
 
-    # Create the vector store and fill it with embeddings
     vector = FAISS.from_documents(documents, embedder)
     retriever = vector.as_retriever(search_kwargs={"k": 3})
 
@@ -44,7 +44,6 @@ if uploaded_file is not None:
         st.error(f"Error connecting to Ollama: {str(e)}")
         st.stop()
 
-    # Define the prompt
     prompt = """
     1. Use the following pieces of context to answer the question at the end.
     2. If you don't know the answer, just say that "I don't know" but don't make up an answer on your own.\n
@@ -78,18 +77,23 @@ if uploaded_file is not None:
         verbose=True,
         return_source_documents=True)
 
-    # User input
-    user_input = st.text_input("Ask a question related to the PDF:")
+    for i in range(len(st.session_state.questions)):
+        st.write(f"Question: {st.session_state.questions[i]}")
+        st.write("Response:")
+        st.write(st.session_state.responses[i]["result"])
+        st.write("\nSources:")
+        for doc in st.session_state.responses[i]["source_documents"]:
+            st.write(f"- {doc.metadata.get('source', 'Unknown')}")
+        st.write("---")
 
-    # Process user input
-    if user_input:
+    user_input = st.text_input("Ask a question related to the PDF:", key=f"input_{st.session_state.counter}")
+
+    if user_input and user_input not in st.session_state.questions:
         with st.spinner("Processing..."):
-            # Use invoke instead of run and handle the response properly
             response = qa.invoke(user_input)
-            st.write("Response:")
-            st.write(response["result"])
-            st.write("\nSources:")
-            for doc in response["source_documents"]:
-                st.write(f"- {doc.metadata.get('source', 'Unknown')}")
+            st.session_state.questions.append(user_input)
+            st.session_state.responses.append(response)
+            st.session_state.counter += 1
+            st.rerun()
 else:
     st.write("Please upload a PDF file to proceed.")
