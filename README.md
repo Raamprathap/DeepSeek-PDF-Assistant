@@ -104,7 +104,6 @@ $ ollama pull deepseek-r1
 
 ## Notes
 - Ensure you have the DeepSeek model (`deepseek-r1`) downloaded before running the app.
-- For better search efficiency, the app uses FAISS for vector storage.
 
 ---
 
