@@ -18,20 +18,20 @@ This project is a Streamlit-based interactive PDF question-answering assistant p
 
 ### Step 1: Clone the Repository
 ```bash
-$ git clone https://github.com/akshayks13/DeepSeek-PDF-Assistant.git
-$ cd DeepSeek-PDF-Assistant
+git clone https://github.com/akshayks13/DeepSeek-PDF-Assistant.git
+cd DeepSeek-PDF-Assistant
 ```
 
 ### Step 2: Set Up Virtual Environment (Optional)
 ```bash
-$ python3 -m venv venv
-$ source venv/bin/activate  # For Mac/Linux
-$ .\venv\Scripts\activate  # For Windows
+python3 -m venv venv
+source venv/bin/activate  # For Mac/Linux
+.\venv\Scripts\activate  # For Windows
 ```
 
 ### Step 3: Install Dependencies
 ```bash
-$ pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ### Step 4: Install Ollama
@@ -39,7 +39,7 @@ $ pip install -r requirements.txt
 ## **[👉 Follow the Ollama Installation Guide](https://ollama.com/)**  
 Alternatively, use the command below:
 ```bash
-$ brew install ollama
+brew install ollama
 ```
 
 ### Step 5: Download the DeepSeek Model
@@ -48,31 +48,31 @@ Ollama provides different variants of the DeepSeek model to suit various computa
 
 #### To Download the Default 7B Model:
 ```bash
-$ ollama pull deepseek-r1
+ollama pull deepseek-r1
 ```
 
 #### To Download Other Model Variants:
 - **1.5B Model:**
   ```bash
-  $ ollama pull deepseek-r1:1.5b
+  ollama pull deepseek-r1:1.5b
   ```
   Suitable for lightweight applications where memory is constrained.
 
 - **14B Model:**
   ```bash
-  $ ollama pull deepseek-r1:14b
+  ollama pull deepseek-r1:14b
   ```
   Balances reasoning power and resource usage.
 
 - **70B Model:**
   ```bash
-  $ ollama pull deepseek-r1:70b
+  ollama pull deepseek-r1:70b
   ```
   Offers advanced reasoning but requires significant RAM.
 
 - **671B Model:**
   ```bash
-  $ ollama pull deepseek-r1:671b
+  ollama pull deepseek-r1:671b
   ```
   Best for heavy computational tasks requiring superior reasoning.
 
@@ -85,7 +85,7 @@ $ ollama pull deepseek-r1
 1. Start the Streamlit application.
 
    ```bash
-   $ streamlit run app.py
+   streamlit run app.py
    ```
 
 2. Open your browser and navigate to the URL
