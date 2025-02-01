@@ -90,6 +90,8 @@ $ ollama pull deepseek-r1
 
 2. Open your browser and navigate to the URL
 
+   ![image](https://github.com/user-attachments/assets/e968c29c-3340-4f1c-97ca-461440b4921f)
+
 ---
 
 ## Usage
