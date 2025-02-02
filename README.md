@@ -76,7 +76,8 @@ ollama pull deepseek-r1
   ```
   Best for heavy computational tasks requiring superior reasoning.
 
-> **Pro Tip:** Choose a model variant based on your system's RAM and performance requirements.
+> [!TIP]
+> Choose a model variant based on your system's RAM and performance requirements.
 
 ---
 
